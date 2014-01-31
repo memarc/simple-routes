@@ -28,8 +28,8 @@ This will register the listed relative urls with whatever functions are defined 
 ```
 (defun home-handler () ())
 (defun people-handler () ())
-(defun get-person-handler (first, last) ())
-(defun put-person-handler (first, last, description) ())
+(defun get-person-handler (first last) ())
+(defun put-person-handler (first last description) ())
 ```
 
 Demo
