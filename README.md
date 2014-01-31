@@ -34,8 +34,10 @@ To run the demo.
 1. Navigate to containing simpleroutes-demo.lisp
 2. open up a Lisp REPL
 3. Run these commands
+ 
 ```
 * (load "simpleroutes-build.asd")
 * (asdf:operate 'asdf:load-op 'simpleroutes-demo)
 ```
+
 4. Navigate to localhost:8080/ in your web browser.
