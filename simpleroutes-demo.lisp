@@ -17,14 +17,14 @@
        (:GET    ""                                      'home-handler)
        (:GET    "/"                                     'home-handler)
        (:GET    "/people"                               'home-handler)
-       (:GET    "/people/:first/:last"                  'get-position-handler)
-       (:GET    "/people/put/:first/:last/:description" 'put-position-handler)
-       (:PUT    "/people/:first/:last/:description"     'put-position-handler)
+       (:GET    "/people/:first/:last"                  'get-people-handler)
+       (:GET    "/people/put/:first/:last/:description" 'put-people-handler)
+       (:PUT    "/people/:first/:last/:description"     'put-people-handler)
               ))
 
 ;all lat/long numbers are rounded to the hundredths place before insertion or checking...
 (defvar *people-hash* (make-hash-table :test #'equalp))
-;;add a couple of predefined positions
+;;add a couple of predefined peoples
 (setf (gethash (list "Nikola" "Tesla") *people-hash*) "AC induction motor FTW!")
 (setf (gethash (list "Thomas" "Edison") *people-hash*) "preferred DC")
 
@@ -47,7 +47,7 @@
 		  *people-hash*)
 )))
 
-(defun get-position-handler (first last)
+(defun get-people-handler (first last)
   (with-html-output-to-string (*standard-output* nil :indent t)
     (:html
      (let ((potentialout (gethash (list first last) *people-hash*)))
@@ -58,7 +58,7 @@
 	     (setf (return-code*) +HTTP-NOT-FOUND+)
 	     (htm (:p "couldn't find that person!"))))))))
 
-(defun put-position-handler (first last description)
+(defun put-people-handler (first last description)
   (with-html-output-to-string (*standard-output* nil)
     (:html
      (:p (fmt "put: ~a " (setf (gethash (list first last) *people-hash*) (url-decode description)))))))
