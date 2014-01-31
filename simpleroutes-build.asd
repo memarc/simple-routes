@@ -6,10 +6,6 @@
 
 (in-package :simpleroutes-asd)
 
-(ql:quickload "hunchentoot")
-(ql:quickload "cl-who")
-(ql:quickload "cl-ppcre")
-
 (defsystem simple-routes
   :name "simple-routes"
   :version "0.2"
