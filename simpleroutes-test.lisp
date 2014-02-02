@@ -1,8 +1,6 @@
 ;gigamonkeys unit testing!
-(ql:quickload :hunchentoot)
-(ql:quickload :cl-ppcre)
-(load "simple-routes.lisp")
-(load "giga-unit.lisp")
+;(load "simple-routes.lisp")
+;(load "giga-unit.lisp")
 
 (defpackage :simpleroutes-tester
   (:use :common-lisp :simple-routes :giga-unit)

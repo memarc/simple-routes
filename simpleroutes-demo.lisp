@@ -1,8 +1,3 @@
-(ql:quickload :hunchentoot)
-(ql:quickload :cl-who)
-(ql:quickload :cl-fad)
-;(load "berryutils.lisp")
-(load "simple-routes.lisp")
 (defpackage :simpleroutes-demo
   (:use :common-lisp :hunchentoot :cl-who :simple-routes))
 
@@ -64,7 +59,7 @@
      (:p (fmt "put: ~a " (setf (gethash (list first last) *people-hash*) (url-decode description)))))))
 
 
-(defparameter *macceptor* (make-instance 'simple-routes:simpleroutes-acceptor :port 8080
+(defvar *macceptor* (make-instance 'simple-routes:simpleroutes-acceptor :port 8080
 					  :document-root *file-root*
 					  :access-log-destination *terminal-io*
 					  :message-log-destination *terminal-io*))
