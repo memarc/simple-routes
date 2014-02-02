@@ -49,30 +49,28 @@
      #<CLOSURE (LAMBDA # :IN MACRO-FUNCTION) {1000F213DB}>)
    the output of this macro can in turn be processed by simple-processor"
   (declare (optimize (debug 3)))
-  (if (equalp httpmethod :ALL)
-      (setf httpmethod '(:GET :HEAD :POST :PUT :DELETE)))
-	   (let* ((thelist (remove "" (cl-ppcre:split "/" urldef) :test #'equalp)) 
-		  (startswithslash (and (> (length urldef) 0) (eql (elt urldef 0) #\/)))
-		  (endswithslash (and (> (length urldef) 1) (eql (lastitem urldef) #\/)))
-		  (colonitems (reverse 
-			       (reduce (lambda (accum nxt) 
-					 (if (issymbolstring nxt) 
-					     (cons nxt accum)
-					     accum))
-				       thelist :initial-value ())))
-		  (theregex (concatenate 'string
-					 "^"
-					 (when startswithslash "/")
-					 (removelast
-					  (apply #'concatenate 'string 
-						 (loop for item in thelist collect
-						      (if (issymbolstring item)
-							  "([^/]*)/"
-							  (concatenate 'string item "/")))))
-					 (when endswithslash "/")
-					 "$"))
-		  (symstobind (mapcar (lambda (item) (intern (string-upcase (subseq item 1)))) colonitems)))
-	     `(list ,httpmethod ,theregex (quote ,symstobind) ,fntocall)))
+  (let* ((thelist (remove "" (cl-ppcre:split "/" urldef) :test #'equalp)) 
+	 (startswithslash (and (> (length urldef) 0) (eql (elt urldef 0) #\/)))
+	 (endswithslash (and (> (length urldef) 1) (eql (lastitem urldef) #\/)))
+	 (colonitems (reverse 
+		      (reduce (lambda (accum nxt) 
+				(if (issymbolstring nxt) 
+				    (cons nxt accum)
+				    accum))
+			      thelist :initial-value ())))
+	 (theregex (concatenate 'string
+				"^"
+				(when startswithslash "/")
+				(removelast
+				 (apply #'concatenate 'string 
+					(loop for item in thelist collect
+					     (if (issymbolstring item)
+						 "([^/]*)/"
+						 (concatenate 'string item "/")))))
+				(when endswithslash "/")
+				"$"))
+	 (symstobind (mapcar (lambda (item) (intern (string-upcase (subseq item 1)))) colonitems)))
+    `(list ,httpmethod ,theregex (quote ,symstobind) ,fntocall)))
 
 (defmacro compile-routes (&rest routespecs)
   `(list ,@(loop for routespec in routespecs collect
