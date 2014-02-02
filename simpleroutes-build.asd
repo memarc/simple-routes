@@ -21,7 +21,7 @@
   :author "Currell Berry"
   :licence "2 clause BSD"
   :description "demonstrates simple use of simple-routes"
-  :depends-on (:hunchentoot :cl-ppcre :cl-who :simple-routes)
+  :depends-on (:hunchentoot :cl-ppcre :cl-who :simple-routes :cl-fad)
   :components ((:file "simpleroutes-demo")))
 
 (defsystem simpleroutes-test
