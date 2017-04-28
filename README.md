@@ -10,7 +10,7 @@ I wrote this library because the current routing methods I found were either too
 Sample syntax
 -------------
 
-simple-routes searches through *routeslist* for every incoming request to try to find a matching handler for the incoming url.  
+simple-routes searches through \*routeslist\* for every incoming request to try to find a matching handler for the incoming url.  
 
 ```
 (setf simple-routes:*routeslist*
