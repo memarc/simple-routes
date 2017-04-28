@@ -1,5 +1,5 @@
 ;;;; -*- mode: common-lisp; -*-
-;;; Currell Bery - sblockserver system definition file
+;;; Currell Bery - simple-routes system definition file
 
 (defpackage #:simpleroutes-asd
   (:use :cl :asdf))
@@ -8,7 +8,7 @@
 
 (defsystem simple-routes
   :name "simple-routes"
-  :version "0.2"
+  :version "0.3"
   :author "Currell Berry"
   :licence "2 clause BSD"
   :description "Facility for straightforward http routing on top of Hunchentoot."
